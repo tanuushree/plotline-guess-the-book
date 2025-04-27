@@ -9,13 +9,21 @@ import { useSession } from "next-auth/react"
 import { submitGuess, recordHintUsage, createOrUpdateUser } from "@/lib/api"
 import { booksByGenre } from "@/lib/book" // Import booksByGenre
 
-// Utility function to fetch a random book
-const getRandomBook = () => {
+// Utility function to deterministically fetch book
+const getBookOfTheDay = () => {
   const genres = Object.keys(booksByGenre)
-  const randomGenre = genres[Math.floor(Math.random() * genres.length)]
-  const books = booksByGenre[randomGenre]
-  return books[Math.floor(Math.random() * books.length)]
+  const allBooks = genres.flatMap((genre) => booksByGenre[genre])
+
+  // Get today's date in YYYYMMDD format as a number
+  const today = new Date()
+  const dateString = today.toISOString().slice(0, 10).replace(/-/g, "") // e.g., "20250427"
+  const seed = parseInt(dateString, 10)
+
+  // Pick a book deterministically
+  const index = seed % allBooks.length
+  return allBooks[index]
 }
+
 
 export default function DailyChallengePage() {
   const router = useRouter()
@@ -32,7 +40,7 @@ export default function DailyChallengePage() {
   const { data: session, status } = useSession()
 
   // Fetch a random book for the daily challenge
-  const dailyChallenge = getRandomBook()
+  const dailyChallenge = getBookOfTheDay()
 
   useEffect(() => {
     setMounted(true)
