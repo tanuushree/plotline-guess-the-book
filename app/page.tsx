@@ -191,7 +191,7 @@ export default function LandingPage() {
       <footer className="py-6 px-4 border-t border-dusty-rose/10 text-center text-charcoal/60 text-sm">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
           <p>© {new Date().getFullYear()} Plotline</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          {/* <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/about" className="hover:text-dusty-rose transition-colors">
               About
             </Link>
@@ -201,7 +201,7 @@ export default function LandingPage() {
             <Link href="/terms" className="hover:text-dusty-rose transition-colors">
               Terms
             </Link>
-          </div>
+          </div> */}
         </div>
       </footer>
     </div>
