@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: "Plotline",
   description: "A literary guessing game for book lovers",
   manifest: "/manifest.json",
-    generator: 'v0.dev'
+    generator: 'tanuushree'
 }
 
 export default async function RootLayout({
