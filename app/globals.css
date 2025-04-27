@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --beige: #f5f0e8;
+  --ivory: #fffcf7;
+  --dusty-rose: #d8b4a0;
+  --faded-teal: #7a9e9f;
+  --charcoal: #36454f;
+}
+
+@layer base {
+  body {
+    @apply bg-beige text-charcoal antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-playfair;
+  }
+
+  p,
+  span,
+  div,
+  button,
+  input {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .genre-card {
+    @apply relative flex flex-col items-center justify-center p-6 rounded-2xl 
+           bg-ivory shadow-sm hover:shadow-md transition-all duration-300
+           border border-dusty-rose/10;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-full bg-gradient-to-r from-dusty-rose to-dusty-rose/90
+           text-ivory font-medium shadow-sm hover:shadow-md
+           transition-all duration-300 transform hover:-translate-y-1;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-full bg-ivory text-charcoal
+           border border-dusty-rose/30 font-medium
+           shadow-sm hover:shadow-md transition-all duration-300
+           transform hover:-translate-y-1;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl bg-ivory border border-dusty-rose/20
+           focus:border-dusty-rose focus:ring-1 focus:ring-dusty-rose
+           focus:outline-none transition-all duration-300;
+  }
+
+  .card {
+    @apply rounded-2xl bg-ivory p-6 shadow-sm border border-dusty-rose/10;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--beige);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dusty-rose);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--faded-teal);
+}
