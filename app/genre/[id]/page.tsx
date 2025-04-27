@@ -19,6 +19,7 @@ export default function GenrePage() {
   const [showHint, setShowHint] = useState(false)
   const [hintType, setHintType] = useState<"author" | "quote" | null>(null)
   const [attempts, setAttempts] = useState(0)
+  const [revealed, setRevealed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const { data: session, status } = useSession()
@@ -180,17 +181,29 @@ export default function GenrePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center"
               >
-                <div className="mb-4 py-3 px-4 bg-green-50 text-green-700 rounded-xl inline-block">
-                  <h3 className="font-playfair text-xl">Correct!</h3>
-                  <p>
-                    The book is indeed "{currentBook.title}" by {currentBook.author}
-                  </p>
+                <div className={`mb-4 py-3 px-4 rounded-xl inline-block ${revealed ? "bg-yellow-50 text-yellow-700" : "bg-green-50 text-green-700"}`}>
+                  {revealed ? (
+                    <>
+                      <h3 className="font-playfair text-xl">Better Luck Next Time!</h3>
+                      <p>
+                        The correct answer was "{currentBook.title}" by {currentBook.author}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="font-playfair text-xl">Correct!</h3>
+                      <p>
+                        The book is indeed "{currentBook.title}" by {currentBook.author}
+                      </p>
+                    </>
+                  )}
                 </div>
                 <button onClick={handleNextBook} className="btn-primary mt-4">
                   Next Book
                 </button>
               </motion.div>
             ) : result === "incorrect" ? (
+
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -198,10 +211,17 @@ export default function GenrePage() {
               >
                 <p>That's not correct. Try again or use a hint!</p>
                 {attempts >= 3 && (
-                  <button onClick={() => setResult("correct")} className="underline mt-2 text-sm">
+                  <button
+                    onClick={() => {
+                      setResult("correct")
+                      setRevealed(true)
+                    }}
+                    className="underline mt-2 text-sm"
+                  >
                     Reveal Answer
                   </button>
                 )}
+
               </motion.div>
             ) : null}
 
