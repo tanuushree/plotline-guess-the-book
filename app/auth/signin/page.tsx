@@ -105,7 +105,7 @@ export default function SignIn() {
             {isLoading ? "Connecting..." : "Sign in with Google"}
           </button>
 
-          <p className="mt-6 text-sm text-center text-charcoal/60">
+          {/* <p className="mt-6 text-sm text-center text-charcoal/60">
             By signing in, you agree to our{" "}
             <Link href="/terms" className="text-dusty-rose hover:underline">
               Terms of Service
@@ -115,7 +115,7 @@ export default function SignIn() {
               Privacy Policy
             </Link>
             .
-          </p>
+          </p> */}
         </motion.div>
       </main>
 
